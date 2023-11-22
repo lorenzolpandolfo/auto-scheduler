@@ -31,3 +31,6 @@ if __name__ == "__main__":
     
     # Cria a imagem nova
     image.gerar_imagem("new")
+
+    print("[!] A imagem foi gerada. O nome do arquivo é 'new.png'" +
+          "e está no diretório local do script. ")
