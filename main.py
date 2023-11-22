@@ -7,10 +7,13 @@ import image
 import day
 import quickstart
 import agenda
+import schedules
 
 if __name__ == "__main__":
     eventos = quickstart.main()
-    horarios_agendados = agenda.horarios_agendados(eventos)
+    agendamentos = agenda.horarios_agendados(eventos)
+    final = schedules.horarios_disponiveis(agendamentos)
+    print(final)
 
     dia = day.gerar_dia_da_semana()
     day.escrever_dia(image.draw, dia)

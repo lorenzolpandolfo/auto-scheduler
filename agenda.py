@@ -1,6 +1,6 @@
 import datetime
 
-def checar_horario(eventos):
+def horarios_agendados(eventos):
     todos_horarios = []
 
     for event in eventos:
