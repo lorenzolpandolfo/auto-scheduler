@@ -4,6 +4,7 @@
 
 from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime
+import escrever_horarios
 
 def gerar_dia_da_semana():
     data = datetime.now()
@@ -24,11 +25,11 @@ def gerar_dia_da_semana():
 
 
 def escrever_dia(draw, dia):
-    text_color = (0,0,0)
+    text_color = (151, 195, 102)
 
     text_lenght = draw.textlength(dia)
     text_pos = (440 - (text_lenght*2),400)
 
-    fonte = ImageFont.load_default(size=75)
+    fonte = ImageFont.truetype(escrever_horarios.carregar_diretorio_fonte("Antonio-Bold"), size=100)
 
-    draw.text(text_pos, dia, font=fonte, fill=text_color)
+    draw.text(text_pos, dia.upper(), font=fonte, fill=text_color)
