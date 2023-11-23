@@ -1,5 +1,6 @@
 import datetime
 import os.path
+import pytz
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -40,12 +41,13 @@ def main():
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
     
-    print("[-] Carregando eventos do Google Agenda")
+    print("[-] Carregando eventos do Google Agenda...")
 
-    agora = datetime.datetime.utcnow()
-    inicio_dia = datetime.datetime(agora.year, agora.month, agora.day, 0, 0, 0, tzinfo=datetime.timezone.utc)
-    fim_dia = datetime.datetime(agora.year, agora.month, agora.day, 23, 59, 59, tzinfo=datetime.timezone.utc)
+    agora = datetime.datetime.now()
+    fuso_horario = datetime.timezone.utc
 
+    inicio_dia = datetime.datetime(agora.year, agora.month, agora.day, 0, 0, 0, tzinfo=fuso_horario)
+    fim_dia = datetime.datetime(agora.year, agora.month, agora.day, 23, 59, 59, tzinfo=fuso_horario)
 
     events_result = (
         service.events()
@@ -60,11 +62,6 @@ def main():
         .execute()
     )
     events = events_result.get("items", [])
-    """
-    for event in events:
-      start = event["start"].get("dateTime", event["start"].get("date"))
-      print(start, event["summary"])
-    """
 
     if not events:
       print("[X] Não foram encontrados eventos para hoje.")
@@ -73,7 +70,7 @@ def main():
     return events
 
   except HttpError as error:
-    print(f"[X] Um erro ocorreu: {error}")
+    print(f"[X] Um erro ocorreu: {error}\n[!] Uma possível solução é excluír o arquivo 'token.json' no diretório local")
 
 
 if __name__ == "__main__":

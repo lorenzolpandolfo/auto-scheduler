@@ -12,6 +12,6 @@ def horarios_agendados(eventos):
         horario = start_datetime.time()
         todos_horarios.append(horario)
         
-        # print(start, event["summary"])
+        print('> ', start, event["summary"])
 
     return todos_horarios    
