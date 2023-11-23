@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 image = Image.open("imagem.png")
 draw = ImageDraw.Draw(image)

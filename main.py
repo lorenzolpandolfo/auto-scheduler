@@ -10,6 +10,7 @@ import agenda
 import schedules
 import escrever_horarios
 
+
 if __name__ == "__main__":
     # Carrega todos eventos da agenda
     eventos = quickstart.main()

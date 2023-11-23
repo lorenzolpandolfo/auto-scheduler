@@ -1,22 +1,14 @@
 """
 Usado para escrever os horários disponíveis na imagem nova.
 """
-
-from PIL import Image, ImageDraw, ImageFont
+from PIL import ImageFont
 from datetime import datetime
-import os
-
-
-def carregar_diretorio_fonte(fonte):
-    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-    
-    # retorna o diretório da fonte
-    return os.path.join(diretorio_atual, fonte + ".ttf")
+import fonts
 
 
 def escrever_horarios_disponiveis(horarios, draw):
     text_color = (0,0,0)
-    fonte = ImageFont.truetype(carregar_diretorio_fonte("HKGrotesk"), size=75)
+    fonte = ImageFont.truetype(fonts.carregar_diretorio_fonte("HKGrotesk"), size=75)
     text_y = 420
     text_x = 135
 

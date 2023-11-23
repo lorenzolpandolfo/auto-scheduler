@@ -1,12 +1,12 @@
-
-# gerar o dia da semana atual em portugues
-#
-
-from PIL import Image, ImageDraw, ImageFont
+from PIL import ImageFont
 from datetime import datetime
-import escrever_horarios
+import fonts
+
 
 def gerar_dia_da_semana():
+    """
+    Carregar o dia da semana atual em português
+    """
     data = datetime.now()
     dia = data.strftime("%A").lower()
 
@@ -30,6 +30,6 @@ def escrever_dia(draw, dia):
     text_lenght = draw.textlength(dia)
     text_pos = (440 - (text_lenght*2),400)
 
-    fonte = ImageFont.truetype(escrever_horarios.carregar_diretorio_fonte("Antonio-Bold"), size=100)
+    fonte = ImageFont.truetype(fonts.carregar_diretorio_fonte("Antonio-Bold"), size=100)
 
     draw.text(text_pos, dia.upper(), font=fonte, fill=text_color)
