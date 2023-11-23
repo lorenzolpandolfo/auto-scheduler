@@ -26,5 +26,5 @@ def horarios_disponiveis(agendamentos):
         if horario in todos_horarios:
             todos_horarios.remove(horario)
     
-    print("\nTodos horários marcados para hoje: \n", todos_horarios)
+    # print("\nTodos horários disponíveis para marcar hoje: \n", todos_horarios)
     return todos_horarios

@@ -25,9 +25,14 @@ def main():
     if creds and creds.expired and creds.refresh_token:
       creds.refresh(Request())
     else:
-      flow = InstalledAppFlow.from_client_secrets_file(
-          "credentials.json", SCOPES
+      try:
+        flow = InstalledAppFlow.from_client_secrets_file(
+            "credentials.json", SCOPES
       )
+      except FileNotFoundError as err:
+        input("[X] O arquivo credentials.json não foi encontrado. Insira-o no diretório local.\n> Digite Enter para fechar.")
+        return 1
+      
       creds = flow.run_local_server(port=0)
     
     # Save the credentials for the next run
