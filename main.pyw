@@ -4,7 +4,7 @@ Criar uma imagem .png organizada informando os horários disponíveis para agend
 A imagem será utilizada nas redes sociais do estabelecimento.
 """
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 import subprocess
 import os
 import sys
@@ -24,13 +24,16 @@ class MainApp:
         self.root.title("Auto scheduler")
         root.geometry("500x500")
         root.resizable(width=False, height=False)
+        root.configure(bg="#7289da")
 
         self.output_area = tk.Text(root, height=20, width=60)
         self.output_area.pack(pady=20)
         
-        self.btn_criar_imagem = tk.Button(root, text="Criar imagem", command=self.criar_imagem)
+        self.btn_criar_imagem = ttk.Button(root, text="Criar imagem", command=self.criar_imagem)
         self.btn_criar_imagem.pack()
 
+        estilo = ttk.Style()
+        estilo.configure("TButton", font=("Arial", 9))
     
     def criar_imagem(self):
         self.output_area.insert(tk.END, "Iniciando Auto Scheduler...\n")
@@ -82,10 +85,10 @@ class MainApp:
 
     def final_window(self):
         self.end = False
-        self.btn_abrir_diretorio = tk.Button(root, text="Abrir Diretório", command=self.open_image_directory)
+        self.btn_abrir_diretorio = ttk.Button(root, text="Abrir Diretório", command=self.open_image_directory)
         self.btn_abrir_diretorio.pack()
 
-        self.btn_sair = tk.Button(root, text="Sair", command=exit)
+        self.btn_sair = ttk.Button(root, text="Sair", command=exit)
         self.btn_sair.pack()
 
 
