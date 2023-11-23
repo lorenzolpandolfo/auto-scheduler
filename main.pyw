@@ -7,7 +7,6 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 import subprocess
 import os
-import sys
 
 import image
 import day
