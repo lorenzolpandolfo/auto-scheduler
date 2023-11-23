@@ -7,6 +7,7 @@ import tkinter as tk
 from tkinter import messagebox
 import subprocess
 import os
+import sys
 
 import image
 import day
@@ -18,22 +19,18 @@ import escrever_horarios
 
 class MainApp:
     def __init__(self, root):
+        self.end = True
         self.root = root
         self.root.title("Auto scheduler")
-        self.init_ui()
-
-
-    def init_ui(self):
-        root.geometry("500x400")
+        root.geometry("500x500")
         root.resizable(width=False, height=False)
 
-        self.output_area = tk.Text(root, height=10, width=60)
+        self.output_area = tk.Text(root, height=20, width=60)
         self.output_area.pack(pady=20)
-        # self.output_area.config(state=tk.DISABLED)
         
         self.btn_criar_imagem = tk.Button(root, text="Criar imagem", command=self.criar_imagem)
         self.btn_criar_imagem.pack()
-    
+
     
     def criar_imagem(self):
         self.output_area.insert(tk.END, "Iniciando Auto Scheduler...\n")
@@ -73,14 +70,29 @@ class MainApp:
             image.gerar_imagem("new")
             self.output_area.insert(tk.END, "Processo finalizado com sucesso.\n")
             
-            messagebox.showinfo("Sucesso!", "A imagem está pronta.")
-            diretorio_script = os.path.dirname(os.path.abspath(__file__))
-            subprocess.Popen(['explorer', diretorio_script], shell=True)
+            if self.end:
+                self.final_window()
+
+            messagebox.showinfo("Sucesso!", "A imagem new.png está pronta. Aperte em Abrir Diretório para abrir o diretório da imagem.")
+
 
         except Exception as e:
             messagebox.showerror("Erro", f"Um erro aconteceu: {str(e)}")
-            
 
+
+    def final_window(self):
+        self.end = False
+        self.btn_abrir_diretorio = tk.Button(root, text="Abrir Diretório", command=self.open_image_directory)
+        self.btn_abrir_diretorio.pack()
+
+        self.btn_sair = tk.Button(root, text="Sair", command=exit)
+        self.btn_sair.pack()
+
+
+    def open_image_directory(self):
+        diretorio_script = os.path.dirname(os.path.abspath(__file__))
+        subprocess.Popen(['explorer', diretorio_script], shell=True)
+        exit()
 
 
 if __name__ == "__main__":
@@ -90,28 +102,3 @@ if __name__ == "__main__":
     app = MainApp(root)
     # iniciando o loop
     root.mainloop()
-"""    
-    # Carrega todos eventos da agenda
-    eventos = quickstart.main()
-    
-    # Pega apenas eventos no dia de hoje
-    agendamentos = agenda.horarios_agendados(eventos)
-
-    # Confere os dias disponíveis de acordo com os horários já reservados
-    dias_disponiveis = schedules.horarios_disponiveis(agendamentos)
-
-    # Escrever horários disponiveis
-    escrever_horarios.escrever_horarios_disponiveis(dias_disponiveis, image.draw)
-
-    # Gera o dia da semana em que o script está rodando
-    dia = day.gerar_dia_da_semana()
-
-    # Escreve o dia atual na imagem
-    day.escrever_dia(image.draw, dia)
-    
-    # Cria a imagem nova
-    image.gerar_imagem("new")
-
-    input("\n[!] A imagem foi gerada. O nome do arquivo é 'new.png'" +
-          "e está no diretório local do script.\n\n" +
-          "> Aperte Enter para terminar o programa.")"""
