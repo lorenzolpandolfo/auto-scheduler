@@ -1,6 +1,6 @@
 import datetime
 
-def horarios_agendados(eventos):
+def horarios_agendados(tk, eventos, msgbox):
     todos_horarios = []
 
     for event in eventos:
@@ -12,6 +12,6 @@ def horarios_agendados(eventos):
         horario = start_datetime.time()
         todos_horarios.append(horario)
         
-        print('> ', start, event["summary"])
+        msgbox.insert(tk.END, "> ", start, event["summary"] + "\n")
 
     return todos_horarios    

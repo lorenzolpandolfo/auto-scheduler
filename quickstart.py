@@ -10,7 +10,7 @@ from googleapiclient.errors import HttpError
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 
-def main():
+def main(tk, msgbox, output):
   creds = None
   # The file token.json stores the user's access and refresh tokens, and is
   # created automatically when the authorization flow completes for the first
@@ -30,8 +30,8 @@ def main():
             "credentials.json", SCOPES
       )
       except FileNotFoundError as err:
-        input("[X] O arquivo credentials.json não foi encontrado. Insira-o no diretório local.\n> Digite Enter para fechar.")
-        return 1
+        msgbox.showerror("Erro", f"O arquivo credentials.json não foi encontrado. Insira-o no diretório local.")
+        exit()
       
       creds = flow.run_local_server(port=0)
     
@@ -45,7 +45,7 @@ def main():
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
     
-    print("[-] Carregando eventos do Google Agenda...")
+    output.insert(tk.END, "Carregando eventos do Google Agenda...\n")
 
     agora = datetime.datetime.now()
     fuso_horario = datetime.timezone.utc
@@ -74,8 +74,7 @@ def main():
     return events
 
   except HttpError as error:
-    input(f"[X] Um erro ocorreu: {error}\n[!] Uma possível solução é excluír o arquivo 'token.json'" + 
-          "no diretório local.\n> Aperte Enter para finalizar o programa.")
+    msgbox.showerror("Erro", f"{str(err)}\nTente excluír o arquivo token.json no diretório local.")
 
 
 if __name__ == "__main__":
