@@ -70,7 +70,8 @@ def main():
     return events
 
   except HttpError as error:
-    print(f"[X] Um erro ocorreu: {error}\n[!] Uma possível solução é excluír o arquivo 'token.json' no diretório local")
+    input(f"[X] Um erro ocorreu: {error}\n[!] Uma possível solução é excluír o arquivo 'token.json'" + 
+          "no diretório local.\n> Aperte Enter para finalizar o programa.")
 
 
 if __name__ == "__main__":
