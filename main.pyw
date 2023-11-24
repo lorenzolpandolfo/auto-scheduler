@@ -5,8 +5,7 @@ A imagem será utilizada nas redes sociais do estabelecimento.
 """
 import tkinter as tk
 from tkinter import messagebox, ttk
-from tkcalendar import Calendar
-
+from CTkScrollableDropdown import *
 import subprocess
 import os
 import customtkinter as ctk
@@ -53,10 +52,22 @@ class MainApp:
 
         self.input_dia = ctk.CTkTextbox(self.sidebar_frame, height=1, width=30)
         self.input_mes = ctk.CTkTextbox(self.sidebar_frame, height=1, width=30)
+
+        def combobox_callback(choice):
+            print("combobox dropdown clicked:", choice)
+        
+        self.combobox_dia_var = ctk.StringVar(value="")  # set initial value
         self.combobox_dia = ctk.CTkComboBox(self.sidebar_frame,
-                                                    values=dnm.dias)
+                                                    values=dnm.hoje_ate_proxima_semana(dia=int(day.dia_atual()), mes="10"),
+                                                                                                            command=combobox_callback,
+                                                                                                            variable=self.combobox_dia_var )
         self.combobox_mes = ctk.CTkComboBox(self.sidebar_frame,
                                                     values=dnm.meses)
+        
+
+
+        
+        CTkScrollableDropdown(self.input_dia,values=dnm.dias)
         self.combobox_dia.grid(row=2, column=0, padx=20)
         self.combobox_mes.grid(row=4, column=0, padx=20)
         
@@ -67,7 +78,7 @@ class MainApp:
         self.input_mes.insert(tk.END, str(day.mes_atual()))
 
 
-        self.btn_criar_imagem = ctk.CTkButton(self.sidebar_frame, text="Criar imagem",
+        self.btn_criar_imagem = ctk.CTkButton(self.sidebar_frame, text="Criar imagem", font=ctk.CTkFont(size=16),
         command=lambda: self.criar_imagem(int(self.input_mes.get("1.0", tk.END)), int(self.input_dia.get("1.0", tk.END))))
 
         self.btn_criar_imagem.grid(row=9,column=0,padx=20,pady=90)
