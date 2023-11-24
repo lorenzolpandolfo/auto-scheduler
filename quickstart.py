@@ -10,7 +10,7 @@ from googleapiclient.errors import HttpError
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
 
 
-def main(tk, msgbox, output):
+def main(tk, msgbox, output, mes, dia):
   creds = None
   # The file token.json stores the user's access and refresh tokens, and is
   # created automatically when the authorization flow completes for the first
@@ -50,8 +50,8 @@ def main(tk, msgbox, output):
     agora = datetime.datetime.now()
     fuso_horario = datetime.timezone.utc
 
-    inicio_dia = datetime.datetime(agora.year, agora.month, agora.day, 0, 0, 0, tzinfo=fuso_horario)
-    fim_dia = datetime.datetime(agora.year, agora.month, agora.day, 23, 59, 59, tzinfo=fuso_horario)
+    inicio_dia = datetime.datetime(agora.year, mes, dia, 0, 0, 0, tzinfo=fuso_horario)
+    fim_dia = datetime.datetime(agora.year, mes, dia, 23, 59, 59, tzinfo=fuso_horario)
 
     events_result = (
         service.events()

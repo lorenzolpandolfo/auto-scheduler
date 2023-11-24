@@ -45,21 +45,25 @@ class MainApp:
         self.input_mes.insert(tk.END, str(day.mes_atual()))
 
 
-        self.btn_criar_imagem = ttk.Button(root, text="Criar imagem", command=self.criar_imagem)
+        self.btn_criar_imagem = ttk.Button(root, text="Criar imagem",
+        command=lambda: self.criar_imagem(int(self.input_mes.get("1.0", tk.END)), int(self.input_dia.get("1.0", tk.END))))
+
         self.btn_criar_imagem.place(x=10,y=200)
 
         estilo = ttk.Style()
         estilo.configure("TButton", font=("Arial", 9))
     
-    def criar_imagem(self):
+
+    def criar_imagem(self, mes, dia):
+        self.output_area.delete("1.0", tk.END)
         self.output_area.insert(tk.END, "Iniciando Auto Scheduler...\n")
         self.root.update()
         try:
             # Carrega todos eventos da agenda
-            eventos = quickstart.main(tk, messagebox, self.output_area)
-            
+            eventos = quickstart.main(tk, messagebox, self.output_area, mes, dia)
             
             # Pega apenas eventos no dia de hoje
+            print(eventos)
             agendamentos = agenda.horarios_agendados(tk, eventos, self.output_area)
 
             self.output_area.insert(tk.END, "Carregando horários disponíveis...\n")
