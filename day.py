@@ -1,13 +1,16 @@
 from PIL import ImageFont
-from datetime import datetime
+from datetime import datetime, timezone
 import fonts
 
 
-def gerar_dia_da_semana():
+def gerar_dia_da_semana(mes, dia):
     """
     Carregar o dia da semana atual em português
     """
-    data = datetime.now()
+    agora = datetime.now()
+    fuso_horario = timezone.utc
+
+    data = datetime(agora.year, mes, dia, tzinfo=fuso_horario)
     dia = data.strftime("%A").lower()
 
     all_days = {
@@ -15,7 +18,9 @@ def gerar_dia_da_semana():
         "tuesday":      "terça",
         "wednesday":    "quarta",
         "thursday":     "quinta",
-        "friday":       "sexta"  
+        "friday":       "sexta",
+        "saturday":    "sábado",
+        "sunday":       "domingo"
     }
 
     if dia in all_days:

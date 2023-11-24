@@ -56,6 +56,7 @@ class MainApp:
 
     def criar_imagem(self, mes, dia):
         self.output_area.delete("1.0", tk.END)
+
         self.output_area.insert(tk.END, "Iniciando Auto Scheduler...\n")
         self.root.update()
         try:
@@ -63,7 +64,6 @@ class MainApp:
             eventos = quickstart.main(tk, messagebox, self.output_area, mes, dia)
             
             # Pega apenas eventos no dia de hoje
-            print(eventos)
             agendamentos = agenda.horarios_agendados(tk, eventos, self.output_area)
 
             self.output_area.insert(tk.END, "Carregando horários disponíveis...\n")
@@ -76,11 +76,12 @@ class MainApp:
             
             # Escrever horários disponiveis
             escrever_horarios.escrever_horarios_disponiveis(dias_disponiveis, image.draw)
+            
 
             self.output_area.insert(tk.END, "Carregando dia da semana...\n")
             
             # Gera o dia da semana em que o script está rodando
-            dia = day.gerar_dia_da_semana()
+            dia = day.gerar_dia_da_semana(mes, dia)
 
             self.output_area.insert(tk.END, "Escrevendo dia da semana na imagem...\n")
             
@@ -110,6 +111,10 @@ class MainApp:
 
         self.btn_sair = ttk.Button(root, text="Sair", command=exit)
         self.btn_sair.place(x=10,y=260)
+
+        # Não está funcionando na terceira vez que cria a imagem.
+        # O texto anterior não é resetado...
+        image.resetar_imagem()
 
 
     def open_image_directory(self):
