@@ -24,7 +24,9 @@ class MainApp:
         root.geometry("600x370")
         root.resizable(width=False, height=False)
         root.configure(bg="#7289da")
+        self.init_gui()
 
+    def init_gui(self):
         self.output_area = tk.Text(root, height=20, width=54)
         self.output_area.place(x=120, y=20)
         
@@ -100,10 +102,10 @@ class MainApp:
     def final_window(self):
         self.end = False
         self.btn_abrir_diretorio = ttk.Button(root, text="Abrir Diretório", command=self.open_image_directory)
-        self.btn_abrir_diretorio.pack()
+        self.btn_abrir_diretorio.place(x=10,y=230)
 
         self.btn_sair = ttk.Button(root, text="Sair", command=exit)
-        self.btn_sair.pack()
+        self.btn_sair.place(x=10,y=260)
 
 
     def open_image_directory(self):
