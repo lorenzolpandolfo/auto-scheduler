@@ -33,3 +33,10 @@ def escrever_dia(draw, dia):
     fonte = ImageFont.truetype(fonts.carregar_diretorio_fonte("Antonio-Bold"), size=100)
 
     draw.text(text_pos, dia.upper(), font=fonte, fill=text_color)
+
+def dia_atual():
+    return datetime.now().day
+
+def mes_atual():
+    return datetime.now().month
+

@@ -21,15 +21,30 @@ class MainApp:
         self.end = True
         self.root = root
         self.root.title("Auto scheduler")
-        root.geometry("500x500")
+        root.geometry("600x370")
         root.resizable(width=False, height=False)
         root.configure(bg="#7289da")
 
-        self.output_area = tk.Text(root, height=20, width=60)
-        self.output_area.pack(pady=20)
+        self.output_area = tk.Text(root, height=20, width=54)
+        self.output_area.place(x=120, y=20)
         
+        self.text_dia = tk.Label(root, text="Dia (número)", borderwidth=0, highlightthickness=0, bg=root.cget("bg"))
+        self.text_dia.place(x=10,y=20)
+
+        self.text_dia = tk.Label(root, text="Mês (número)", borderwidth=0, highlightthickness=0, bg=root.cget("bg"))
+        self.text_dia.place(x=10,y=63)
+        
+        self.input_dia = tk.Text(root, height=1, width=9)
+        self.input_mes = tk.Text(root, height=1, width=9)
+        self.input_dia.place(x=10, y=38)
+        self.input_mes.place(x=10, y=79)
+
+        self.input_dia.insert(tk.END, str(day.dia_atual()))
+        self.input_mes.insert(tk.END, str(day.mes_atual()))
+
+
         self.btn_criar_imagem = ttk.Button(root, text="Criar imagem", command=self.criar_imagem)
-        self.btn_criar_imagem.pack()
+        self.btn_criar_imagem.place(x=10,y=200)
 
         estilo = ttk.Style()
         estilo.configure("TButton", font=("Arial", 9))
