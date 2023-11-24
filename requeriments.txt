@@ -3,3 +3,6 @@ google-auth-httplib2
 google-auth-oauthlib
 pillow
 tkinter
+customtkinter
+packaging
+tkcalendar

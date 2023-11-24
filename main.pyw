@@ -5,8 +5,11 @@ A imagem será utilizada nas redes sociais do estabelecimento.
 """
 import tkinter as tk
 from tkinter import messagebox, ttk
+from tkcalendar import Calendar
+
 import subprocess
 import os
+import customtkinter as ctk
 
 import image
 import day
@@ -14,7 +17,10 @@ import quickstart
 import agenda
 import schedules
 import escrever_horarios
+import dnm
 
+ctk.set_appearance_mode("System")
+ctk.set_default_color_theme("blue")
 
 class MainApp:
     def __init__(self, root):
@@ -25,30 +31,46 @@ class MainApp:
         root.resizable(width=False, height=False)
         root.configure(bg="#7289da")
         self.init_gui()
-
+        
     def init_gui(self):
-        self.output_area = tk.Text(root, height=20, width=54)
+        self.output_area = ctk.CTkTextbox(root, height=20, width=54)
         self.output_area.place(x=120, y=20)
-        
-        self.text_dia = tk.Label(root, text="Dia (número)", borderwidth=0, highlightthickness=0, bg=root.cget("bg"))
-        self.text_dia.place(x=10,y=20)
 
-        self.text_dia = tk.Label(root, text="Mês (número)", borderwidth=0, highlightthickness=0, bg=root.cget("bg"))
-        self.text_dia.place(x=10,y=63)
+        self.sidebar_frame = ctk.CTkFrame(root, width=170, height=370, corner_radius=10)
+        self.sidebar_frame.grid(row=0, column=0, rowspan=4, sticky="nsew")
+
+
+        self.title = ctk.CTkLabel(self.sidebar_frame, text="Auto Scheduler",font=ctk.CTkFont(size=23, weight="bold"))
+        self.title.grid(row=0, column=0, padx=20, pady=(20, 20))
+
+
+        self.text_dia = ctk.CTkLabel(self.sidebar_frame, text="Dia",font=ctk.CTkFont(size=18))
+        self.text_dia.grid(row=1, column=0)
+
+        self.text_mes = ctk.CTkLabel(self.sidebar_frame, text="Mês",font=ctk.CTkFont(size=18))
+        self.text_mes.grid(row=3, column=0,pady=(20,0))
         
-        self.input_dia = tk.Text(root, height=1, width=9)
-        self.input_mes = tk.Text(root, height=1, width=9)
-        self.input_dia.place(x=10, y=38)
-        self.input_mes.place(x=10, y=79)
+
+        self.input_dia = ctk.CTkTextbox(self.sidebar_frame, height=1, width=30)
+        self.input_mes = ctk.CTkTextbox(self.sidebar_frame, height=1, width=30)
+        self.combobox_dia = ctk.CTkComboBox(self.sidebar_frame,
+                                                    values=dnm.dias)
+        self.combobox_mes = ctk.CTkComboBox(self.sidebar_frame,
+                                                    values=dnm.meses)
+        self.combobox_dia.grid(row=2, column=0, padx=20)
+        self.combobox_mes.grid(row=4, column=0, padx=20)
+        
+        #self.input_dia.place(x=50, y=55)
+        #self.input_mes.place(x=10, y=79)
 
         self.input_dia.insert(tk.END, str(day.dia_atual()))
         self.input_mes.insert(tk.END, str(day.mes_atual()))
 
 
-        self.btn_criar_imagem = ttk.Button(root, text="Criar imagem",
+        self.btn_criar_imagem = ctk.CTkButton(self.sidebar_frame, text="Criar imagem",
         command=lambda: self.criar_imagem(int(self.input_mes.get("1.0", tk.END)), int(self.input_dia.get("1.0", tk.END))))
 
-        self.btn_criar_imagem.place(x=10,y=200)
+        self.btn_criar_imagem.grid(row=9,column=0,padx=20,pady=90)
 
         estilo = ttk.Style()
         estilo.configure("TButton", font=("Arial", 9))
@@ -106,10 +128,10 @@ class MainApp:
 
     def final_window(self):
         self.end = False
-        self.btn_abrir_diretorio = ttk.Button(root, text="Abrir Diretório", command=self.open_image_directory)
+        self.btn_abrir_diretorio = ctk.CTkButton(root, text="Abrir Diretório", command=self.open_image_directory)
         self.btn_abrir_diretorio.place(x=10,y=230)
 
-        self.btn_sair = ttk.Button(root, text="Sair", command=exit)
+        self.btn_sair = ctk.CTkButton(root, text="Sair", command=exit)
         self.btn_sair.place(x=10,y=260)
 
         # Não está funcionando na terceira vez que cria a imagem.
@@ -125,7 +147,8 @@ class MainApp:
 
 if __name__ == "__main__":
     # criando a janela principal
-    root = tk.Tk()
+    # root = tk.Tk()
+    root = ctk.CTk()
     # mandando a janela principal pro MainApp
     app = MainApp(root)
     # iniciando o loop
