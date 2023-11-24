@@ -26,6 +26,5 @@ def hoje_ate_proxima_semana(dia, mes):
             break
         else:
             total_dias.append(str(dia_dentro_do_range))
-        
-    print(total_dias)
+    
     return total_dias

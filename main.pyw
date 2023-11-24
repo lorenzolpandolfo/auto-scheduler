@@ -48,47 +48,34 @@ class MainApp:
 
         self.text_mes = ctk.CTkLabel(self.sidebar_frame, text="Mês",font=ctk.CTkFont(size=18))
         self.text_mes.grid(row=3, column=0,pady=(20,0))
-        
 
-        self.input_dia = ctk.CTkTextbox(self.sidebar_frame, height=1, width=30)
-        self.input_mes = ctk.CTkTextbox(self.sidebar_frame, height=1, width=30)
-
-        def combobox_callback(choice):
-            print("combobox dropdown clicked:", choice)
         
-        self.combobox_dia_var = ctk.StringVar(value="")  # set initial value
+        self.combobox_dia_var = ctk.StringVar(value=str(day.dia_atual()))
         self.combobox_dia = ctk.CTkComboBox(self.sidebar_frame,
-                                                    values=dnm.hoje_ate_proxima_semana(dia=int(day.dia_atual()), mes="10"),
-                                                                                                            command=combobox_callback,
-                                                                                                            variable=self.combobox_dia_var )
+                                                    values=dnm.hoje_ate_proxima_semana(dia=int(day.dia_atual()), mes=str(day.mes_atual())),
+                                                                                                            variable=self.combobox_dia_var)
+        
+        self.combobox_mes_var = ctk.StringVar(value=str(day.mes_atual()))
         self.combobox_mes = ctk.CTkComboBox(self.sidebar_frame,
-                                                    values=dnm.meses)
+                                                    values=dnm.meses,
+                                                    variable=self.combobox_mes_var)
         
 
-
-        
-        CTkScrollableDropdown(self.input_dia,values=dnm.dias)
         self.combobox_dia.grid(row=2, column=0, padx=20)
         self.combobox_mes.grid(row=4, column=0, padx=20)
         
-        #self.input_dia.place(x=50, y=55)
-        #self.input_mes.place(x=10, y=79)
-
-        self.input_dia.insert(tk.END, str(day.dia_atual()))
-        self.input_mes.insert(tk.END, str(day.mes_atual()))
-
 
         self.btn_criar_imagem = ctk.CTkButton(self.sidebar_frame, text="Criar imagem", font=ctk.CTkFont(size=16),
-        command=lambda: self.criar_imagem(int(self.input_mes.get("1.0", tk.END)), int(self.input_dia.get("1.0", tk.END))))
+        command=lambda: self.criar_imagem(self.combobox_dia_var,self.combobox_mes_var))
 
-        self.btn_criar_imagem.grid(row=9,column=0,padx=20,pady=90)
+        self.btn_criar_imagem.grid(row=9,column=0,padx=20,pady=70)
 
-        estilo = ttk.Style()
-        estilo.configure("TButton", font=("Arial", 9))
-    
 
-    def criar_imagem(self, mes, dia):
+    def criar_imagem(self, dia, mes):
         self.output_area.delete("1.0", tk.END)
+        
+        mes = mes.get()
+        dia = dia.get()
 
         self.output_area.insert(tk.END, "Iniciando Auto Scheduler...\n")
         self.root.update()
@@ -139,12 +126,13 @@ class MainApp:
 
     def final_window(self):
         self.end = False
+        
         self.btn_abrir_diretorio = ctk.CTkButton(root, text="Abrir Diretório", command=self.open_image_directory)
-        self.btn_abrir_diretorio.place(x=10,y=230)
+        self.btn_abrir_diretorio.place(x=35,y=305)
 
         self.btn_sair = ctk.CTkButton(root, text="Sair", command=exit)
-        self.btn_sair.place(x=10,y=260)
-
+        self.btn_sair.place(x=35,y=340)
+        
         # Não está funcionando na terceira vez que cria a imagem.
         # O texto anterior não é resetado...
         image.resetar_imagem()
