@@ -9,6 +9,7 @@ This example demonstrates the final result of a run. All these times are availab
 ![preview](https://github.com/lorenzolpandolfo/auto-scheduler/assets/133379234/8e59d925-3865-4a11-934a-bf59b3951f3d)
 
 # GUI Preview
-![i2](https://github.com/lorenzolpandolfo/auto-scheduler/assets/133379234/ad2826a9-7ca5-4f59-8453-6814c32ae91f)
-![i3](https://github.com/lorenzolpandolfo/auto-scheduler/assets/133379234/1e27a9c7-078b-492f-b498-3fabda042b78)
-![i1](https://github.com/lorenzolpandolfo/auto-scheduler/assets/133379234/c3138538-76e6-4d50-88f9-384bf1165ab6)
+![i1](https://github.com/lorenzolpandolfo/auto-scheduler/assets/133379234/dd9a6b91-585b-446b-8314-0b130504aa92)
+![i2](https://github.com/lorenzolpandolfo/auto-scheduler/assets/133379234/b0402ebc-dc70-4346-954a-3e500a07cb66)
+![i3](https://github.com/lorenzolpandolfo/auto-scheduler/assets/133379234/375fd517-1801-4f1c-915c-aaf6de2ba0e2)
+![i4](https://github.com/lorenzolpandolfo/auto-scheduler/assets/133379234/f864a5a6-82fc-41a9-b98e-19118b9ea9bd)
