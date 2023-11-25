@@ -4,7 +4,7 @@ Criar uma imagem .png organizada informando os horários disponíveis para agend
 A imagem será utilizada nas redes sociais do estabelecimento.
 """
 import tkinter as tk
-from tkinter import messagebox, ttk
+from tkinter import messagebox
 import subprocess
 import os
 import customtkinter as ctk
@@ -29,8 +29,13 @@ class MainApp:
         root.resizable(width=False, height=False)
         root.configure(bg="#7289da")
         self.init_gui()
+
         
     def init_gui(self):
+
+        # Carregando logo do app
+        #root.iconbitmap("logo.ico")
+        root.wm_iconbitmap("logo.ico")
 
         # Main Frame
         self.main_frame = ctk.CTkFrame(root, width=350, height=330, corner_radius=10)
@@ -49,7 +54,7 @@ class MainApp:
         self.sidebar_frame.grid(row=0, column=0, rowspan=4, sticky="nsew")
 
         # App title
-        self.title = ctk.CTkLabel(self.sidebar_frame, text="Auto Scheduler",font=ctk.CTkFont(size=23, weight="bold"))
+        self.title = ctk.CTkLabel(self.sidebar_frame, text="Data da Imagem",font=ctk.CTkFont(size=23, weight="bold"))
         self.title.grid(row=0, column=0, padx=20, pady=(20, 20))
 
 
@@ -97,10 +102,13 @@ class MainApp:
 
             # Carrega todos eventos da agenda
             eventos = quickstart.main(tk, messagebox, self.output_area, mes, dia)
+
+            if not eventos:
+                self.output_area.insert(tk.END, "Um erro aconteceu. Reabra o programa e confira a data inserida.\n")
+                return 1
             
             # Pega apenas eventos no dia de hoje
             agendamentos = agenda.horarios_agendados(tk, eventos, self.output_area)
-            self.output_area.insert(tk.END, "Carregando horários disponíveis...\n")
             self.root.update()
 
             # Confere os dias disponíveis de acordo com os horários já reservados
@@ -137,10 +145,10 @@ class MainApp:
         self.end = False
         
         self.btn_abrir_diretorio = ctk.CTkButton(root, text="Abrir Diretório", command=self.open_image_directory)
-        self.btn_abrir_diretorio.place(x=35,y=305)
+        self.btn_abrir_diretorio.place(x=41,y=303)
 
         self.btn_sair = ctk.CTkButton(root, text="Sair", command=exit)
-        self.btn_sair.place(x=35,y=340)
+        self.btn_sair.place(x=41,y=336)
         
         # Não está funcionando na terceira vez que cria a imagem.
         # O texto anterior não é resetado...
@@ -155,7 +163,6 @@ class MainApp:
 
 if __name__ == "__main__":
     # criando a janela principal
-    # root = tk.Tk()
     root = ctk.CTk()
     # mandando a janela principal pro MainApp
     app = MainApp(root)

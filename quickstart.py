@@ -68,8 +68,8 @@ def main(tk, msgbox, output, mes, dia):
     events = events_result.get("items", [])
 
     if not events:
-      msgbox.showerror("Erro", f"{str(err)}\nNão foram encontrados eventos para hoje.")
-      return
+      msgbox.showerror("Erro", "Não foram encontrados eventos para hoje.")
+      return False
 
     return events
 
