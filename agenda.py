@@ -12,6 +12,6 @@ def horarios_agendados(tk, eventos, msgbox):
         horario = start_datetime.time()
         todos_horarios.append(horario)
         
-        msgbox.insert(tk.END, "> ", start, event["summary"] + "\n")
+        msgbox.insert(tk.END, f"• {event['summary']}\n")
 
     return todos_horarios    
