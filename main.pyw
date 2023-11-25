@@ -90,6 +90,11 @@ class MainApp:
         self.output_area.insert(tk.END, "Iniciando Auto Scheduler. Por favor, aguarde.\n")
         self.root.update()
         try:
+            self.output_area.insert(tk.END, "Carregando dia da semana...\n")
+            
+            # Gera o dia da semana em que o script está rodando
+            dia_da_semana = day.gerar_dia_da_semana(mes, dia)
+
             # Carrega todos eventos da agenda
             eventos = quickstart.main(tk, messagebox, self.output_area, mes, dia)
             
@@ -99,7 +104,7 @@ class MainApp:
             self.root.update()
 
             # Confere os dias disponíveis de acordo com os horários já reservados
-            dias_disponiveis = schedules.horarios_disponiveis(agendamentos)
+            dias_disponiveis = schedules.horarios_disponiveis(agendamentos, dia_da_semana)
 
             self.output_area.insert(tk.END, "Iniciando criação de imagem.\nEscrevendo horários...\n")
             
@@ -107,15 +112,11 @@ class MainApp:
             escrever_horarios.escrever_horarios_disponiveis(dias_disponiveis, image.draw)
             
 
-            self.output_area.insert(tk.END, "Carregando dia da semana...\n")
-            
-            # Gera o dia da semana em que o script está rodando
-            dia = day.gerar_dia_da_semana(mes, dia)
 
             self.output_area.insert(tk.END, "Escrevendo o dia da semana na imagem...\n")
             
             # Escreve o dia atual na imagem
-            day.escrever_dia(image.draw, dia)
+            day.escrever_dia(image.draw, dia_da_semana)
             
             self.output_area.insert(tk.END, "Gerando imagem final...\n")
             self.root.update()
