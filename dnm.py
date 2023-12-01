@@ -16,8 +16,7 @@ dias_por_mes = {
     "12":    31
 }
 
-def hoje_ate_proxima_semana(dia, mes):
-    global dias
+def hoje_ate_proxima_semana(dia, mes, dias):
     total_dias = []
     for i in range(0,8):
         dia_dentro_do_range = int(dias[dia - 1]) + i

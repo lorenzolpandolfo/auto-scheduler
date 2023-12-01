@@ -67,7 +67,7 @@ class MainApp:
         
         self.combobox_dia_var = ctk.StringVar(value=str(day.dia_atual()))
         self.combobox_dia = ctk.CTkComboBox(self.sidebar_frame,
-                                                    values=dnm.hoje_ate_proxima_semana(dia=int(day.dia_atual()), mes=str(day.mes_atual())),
+                                                    values=dnm.hoje_ate_proxima_semana(dia=int(day.dia_atual()), mes=str(day.mes_atual()), dias=dnm.dias),
                                                                                                             variable=self.combobox_dia_var)
         
         self.combobox_mes_var = ctk.StringVar(value=str(day.mes_atual()))
