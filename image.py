@@ -8,7 +8,7 @@ def gerar_imagem(title):
 def resetar_imagem():
     global image
     global draw
-
+    
     image = root_image.copy()
     draw = ImageDraw.Draw(image)
 

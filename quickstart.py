@@ -31,7 +31,6 @@ def main(tk, msgbox, output, mes, dia):
       )
       except FileNotFoundError as err:
         msgbox.showerror("Erro", f"O arquivo credentials.json não foi encontrado. Insira-o no diretório local.")
-        exit()
       
       creds = flow.run_local_server(port=0)
     

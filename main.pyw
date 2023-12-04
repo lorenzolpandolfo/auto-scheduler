@@ -16,6 +16,7 @@ import agenda
 import schedules
 import escrever_horarios
 import dnm
+import fixes
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
@@ -89,8 +90,10 @@ class MainApp:
     def criar_imagem(self, dia, mes):
         self.output_area.delete("1.0", tk.END)
         
-        mes = int(mes.get())
-        dia = int(dia.get())
+        if not (isinstance(mes, int) and isinstance(dia, int)):
+            mes = int(mes.get())
+            dia = int(dia.get())
+
 
         self.output_area.insert(tk.END, "Iniciando Auto Scheduler. Por favor, aguarde.\n")
         self.root.update()
@@ -138,7 +141,15 @@ class MainApp:
             messagebox.showinfo("Sucesso!", "A imagem new.png está pronta. Aperte em Abrir Diretório para abrir o diretório da imagem.")
 
         except Exception as e:
-            messagebox.showerror("Erro", f"Um erro aconteceu: {str(e)}")
+            if "invalid_grant" in str(e):
+                fixes.token(messagebox)
+                messagebox.showinfo("O token expirou", "Clique em OK e aguarde o navegador abrir para realizar o login na conta Google. " +
+                                     "Será informado que o app não é verificado, então clique em Continuar.")
+                self.criar_imagem(self.combobox_dia_var,self.combobox_mes_var)
+                    
+
+            else:
+                messagebox.showerror("Erro", f"Um erro aconteceu: {str(e)}")
 
 
     def final_window(self):
