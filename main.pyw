@@ -166,7 +166,7 @@ class MainApp:
 
 if __name__ == "__main__":
     # updater
-    updater.atualizar()
+    updater.criar_janela()
 
     # main
     root = ctk.CTk()
