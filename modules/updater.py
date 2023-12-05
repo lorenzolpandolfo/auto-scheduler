@@ -23,13 +23,21 @@ class UpdaterApp:
 
     def git_pull(self):
         try:
-            subprocess.run(['git','pull','origin','master'], check=True)
+            subprocess.run(['git','pull','origin','master'], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
             self.root.after(50, self.root.destroy)
         
         except Exception as e:
             print(f"Erro: {e}")
             self.root.after(50, self.root.destroy)
             
+
+def atualizar():
+    try:
+        subprocess.run(['git','pull','origin','master'], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+
+    except Exception as e:
+        print(f"Erro: {e}")
+
 
 def criar_janela():
     root = ctk.CTk()
