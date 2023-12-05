@@ -9,14 +9,7 @@ import subprocess
 import os
 import customtkinter as ctk
 
-import image
-import day
-import quickstart
-import agenda
-import schedules
-import escrever_horarios
-import dnm
-import fixes
+from modules import image, day, quickstart, agenda, schedules, escrever_horarios, dnm, fixes, updater
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
@@ -35,7 +28,6 @@ class MainApp:
     def init_gui(self):
 
         # Carregando logo do app
-        #root.iconbitmap("logo.ico")
         root.wm_iconbitmap("logo.ico")
 
         # Main Frame
@@ -173,9 +165,10 @@ class MainApp:
 
 
 if __name__ == "__main__":
-    # criando a janela principal
+    # updater
+    updater.criar_janela()
+
+    # main
     root = ctk.CTk()
-    # mandando a janela principal pro MainApp
     app = MainApp(root)
-    # iniciando o loop
     root.mainloop()

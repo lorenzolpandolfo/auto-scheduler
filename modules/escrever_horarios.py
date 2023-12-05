@@ -2,8 +2,7 @@
 Usado para escrever os horários disponíveis na imagem nova.
 """
 from PIL import ImageFont
-from datetime import datetime
-import fonts
+from modules import fonts
 
 
 def escrever_horarios_disponiveis(horarios, draw):

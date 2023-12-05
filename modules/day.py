@@ -1,6 +1,6 @@
 from PIL import ImageFont
 from datetime import datetime, timezone
-import fonts
+from modules import fonts
 
 
 def gerar_dia_da_semana(mes, dia):
