@@ -8,6 +8,7 @@ from tkinter import messagebox
 import subprocess
 import os
 import customtkinter as ctk
+import platform
 
 from modules import image, day, quickstart, agenda, schedules, escrever_horarios, dnm, fixes, updater
 
@@ -26,9 +27,11 @@ class MainApp:
 
         
     def init_gui(self):
-
         # Carregando logo do app
-        root.wm_iconbitmap("logo.ico")
+        os = platform.system()
+
+        if os == "Windows":
+            root.wm_iconbitmap("logo.ico")
 
         # Main Frame
         self.main_frame = ctk.CTkFrame(root, width=350, height=330, corner_radius=10)

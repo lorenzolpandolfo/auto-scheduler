@@ -1,7 +1,7 @@
 import subprocess
 import tkinter as tk
 import customtkinter as ctk
-
+import platform
 
 class UpdaterApp:
     def __init__(self, root):
@@ -26,8 +26,13 @@ class UpdaterApp:
 
     def git_pull(self):
         try:
-            subprocess.run(['git','pull','origin','master'], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
-        
+            os = platform.system()
+            
+            if os == "Windows":
+                subprocess.run(['git','pull','origin','master'], check=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            else:
+                subprocess.run(['git','pull','origin','master'], check=True)
+
         except Exception as e:
             print(f"Erro: {e}")
         
